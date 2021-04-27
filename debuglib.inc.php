@@ -32,22 +32,26 @@
 */
 
 if (function_exists('print_a')) {
-
 	return; // debuglib was already included before
-
 } else {
-
-	if (!defined('USE_DEBUGLIB'))
+	if (!defined('USE_DEBUGLIB')) {
 		define('USE_DEBUGLIB', true);
-
-	if (!array_key_exists('DEBUGLIB_LVL', $GLOBALS))
+	}
+	if (!array_key_exists('DEBUGLIB_LVL', $GLOBALS)) {
 		$GLOBALS['DEBUGLIB_LVL']=99;           // 99 debug levels should be enough for everyone
-	if (!array_key_exists('DEBUGLIB_MAX_Y', $GLOBALS))
+	}
+	if (!array_key_exists('DEBUGLIB_MAX_Y', $GLOBALS)) {
 		$GLOBALS['DEBUGLIB_MAX_Y']=50;           // how much items per level should get displayed (max_y)
-	if (!array_key_exists('DEBUGLIB_MAIL_ENCODING', $GLOBALS))
+	}
+	if (!array_key_exists('DEBUGLIB_MAIL_ENCODING', $GLOBALS)) {
 		$GLOBALS['DEBUGLIB_MAIL_ENCODING']='utf-8';      // encoding for the mail option
-	if (!array_key_exists('USE_DEBUGLIB', $GLOBALS))
+	}
+	if (!array_key_exists('USE_DEBUGLIB', $GLOBALS)) {
 		$GLOBALS['USE_DEBUGLIB']=USE_DEBUGLIB; // you can set this to TRUE if you have to overwrite the setting in a live environment
+	}
+	if (!isset($_SESSION)) {
+		$_SESSION=null;
+	}
 
 	$GLOBALS['DbugL_Globals']=[];
 	$GLOBALS['DbugL_Globals']['microtime_start']=microtime(true);
@@ -100,21 +104,20 @@ if (function_exists('print_a')) {
 					Valid options:<br />
 
 					<table>
-						<tr><th>return:</th>					<td>(0|1)</td>	  <td>Do not print the output and instead return it as a string.</td></tr>
-						<!--<tr><th>help:</th>					  <td>(1)</td>		<td>Show this text.</td></tr>-->
-						<tr><th>label:</th>					 <td>(string)</td>   <td>Draw a fieldset/legend around the output.</td></tr>
-						<tr><th>max_y:</th>					 <td>(1-n)</td>	  <td>Maximum number of items on the same level. [...] (defaults to 50)</td></tr>
-						<tr><th>pickle:</th>					<td>(0|1)</td>	  <td>Print a serialized representation of the array instead of printing it as a table.</td></tr>
-						<tr><th>export:</th>					<td>(0|1)</td>	  <td>Print PHP sourcecode of the array. <span class="new">new</span></td></tr>
-						<tr><th>trim_tabs:</th>				 <td>(0-n)</td>	  <td>Trim the leading tabs in multiline strings and pad with n tabs.</td></tr>
-						<tr><th>window:</th>					<td>(string)</td>   <td>The output should open in a new window (javascript), the parameter is also the title for the window.</td></tr>
-						<tr><th>window_link:</th>			   <td>(0|1)</td>	  <td>Don\'t open a window, just print a link which opens one when clicked. <span class="new">new</span></td></tr>
-						<tr><th>debug_level:</th>			   <td>(0-99)</td>	 <td>Only do something if the debug level value is <= the global debug level ($GLOBALS[\'DEBUGLIB_LVL\'] default 99) <span class="new">new</span></td></tr>
-						<tr><th></th>						   <td></td>		   <td>You can also set it to an array with the levels you want to display e.g. $GLOBALS[\'DEBUGLIB_LVL\'] = array(3,5)</td></tr>
-						<tr><th>avoid@:</th>					<td>(0|1)</td>	  <td>If a key starts with the character "@", assume it is a recursive reference and don\'t follow it.</td></tr>
-						<tr><th>mail:</th>					  <td>(string)</td>   <td>Mail the output as HTML mail to the supplied email address. <span class="new">new</span></td></tr>
-						<tr><th>mail_encoding:</th>			 <td>(string)</td>   <td>encoding for the HTML mail. (defaults to "utf-8")</td></tr>
-
+						<tr><th>return:</th><td>(0|1)</td><td>Do not print the output and instead return it as a string.</td></tr>
+						<!--<tr><th>help:</th><td>(1)</td><td>Show this text.</td></tr>-->
+						<tr><th>label:</th><td>(string)</td><td>Draw a fieldset/legend around the output.</td></tr>
+						<tr><th>max_y:</th><td>(1-n)</td><td>Maximum number of items on the same level. [...] (defaults to 50)</td></tr>
+						<tr><th>pickle:</th><td>(0|1)</td><td>Print a serialized representation of the array instead of printing it as a table.</td></tr>
+						<tr><th>export:</th><td>(0|1)</td><td>Print PHP sourcecode of the array. <span class="new">new</span></td></tr>
+						<tr><th>trim_tabs:</th><td>(0-n)</td><td>Trim the leading tabs in multiline strings and pad with n tabs.</td></tr>
+						<tr><th>window:</th><td>(string)</td><td>The output should open in a new window (javascript), the parameter is also the title for the window.</td></tr>
+						<tr><th>window_link:</th><td>(0|1)</td><td>Don\'t open a window, just print a link which opens one when clicked. <span class="new">new</span></td></tr>
+						<tr><th>debug_level:</th><td>(0-99)</td><td>Only do something if the debug level value is <= the global debug level ($GLOBALS[\'DEBUGLIB_LVL\'] default 99) <span class="new">new</span></td></tr>
+						<tr><th></th><td></td><td>You can also set it to an array with the levels you want to display e.g. $GLOBALS[\'DEBUGLIB_LVL\'] = array(3,5)</td></tr>
+						<tr><th>avoid@:</th><td>(0|1)</td><td>If a key starts with the character "@", assume it is a recursive reference and don\'t follow it.</td></tr>
+						<tr><th>mail:</th> <td>(string)</td><td>Mail the output as HTML mail to the supplied email address. <span class="new">new</span></td></tr>
+						<tr><th>mail_encoding:</th><td>(string)</td><td>encoding for the HTML mail. (defaults to "utf-8")</td></tr>
 					</table>
 					<br />
 
@@ -152,8 +155,8 @@ if (function_exists('print_a')) {
 					Possible options:<br />
 
 					<table>
-						<tr><th>return:</th>	<td>(0|1)</td> <td>return the output instead of printing it</td></tr>
-						<tr><th>trim_tabs:</th> <td>(0-n)</td> <td>same as in print_a()</td></tr>
+						<tr><th>return:</th><td>(0|1)</td><td>return the output instead of printing it</td></tr>
+						<tr><th>trim_tabs:</th><td>(0-n)</td><td>same as in print_a()</td></tr>
 					</table>
 					<br />
 
@@ -173,8 +176,7 @@ if (function_exists('print_a')) {
 
 		public $window_open_tracker=[];
 
-		private $default_options=['label'=>null, 'window'=>null, 'window_link'=>false, 'max_y'=>0, 'test_for_recursions'=>false, 'show_objects'=>true, 'trim_tabs'=>null, 'avoid@'=>false, 'return'=>false, 'pickle'=>false, 'export'=>false, 'escape_html'=>2, 'mail'=>null, 'mail_encoding'=>'utf-8', // iso-8859-1
-			'debug_level'=>0,];
+		private $default_options=['label'=>null, 'window'=>null, 'window_link'=>false, 'max_y'=>0, 'test_for_recursions'=>false, 'show_objects'=>true, 'trim_tabs'=>null, 'avoid@'=>false, 'return'=>false, 'pickle'=>false, 'export'=>false, 'escape_html'=>2, 'mail'=>null, 'mail_encoding'=>'utf-8', 'debug_level'=>0];
 
 		public $options=[];
 
@@ -205,71 +207,57 @@ if (function_exists('print_a')) {
 
 		public static $css='
 			<style type="text/css" media="screen">
-
-				*.DbugL				{ font-family: Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular, sans-serif; }
-
-				pre.DbugL			  { display:inline; background:#F1F1F1; font-size:8pt; }
-				div.DbugL			  { margin-bottom:5px; }
-
-				a.DbugL_window_link	{ font-size:xx-small; color:black; border:1px solid darkorange; padding:3px; background:#F1F1F1; margin:2px;}
-
-				div.DbugL_pre		  { font-size:8pt; font-family: Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular, sans-serif; margin-bottom:10px; }
-
+				*.DbugL { font-family: Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular, sans-serif; }
+				pre.DbugL { display:inline; background:#F1F1F1; font-size:8pt; }
+				div.DbugL { margin-bottom:5px; }
+				a.DbugL_window_link { font-size:xx-small; color:black; border:1px solid darkorange; padding:3px; background:#F1F1F1; margin:2px;}
+				div.DbugL_pre { font-size:8pt; font-family: Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular, sans-serif; margin-bottom:10px; }
 				/* Profont is a monospace bitmap font which absolutely rocks! see: http://www.tobias-jung.de/seekingprofont/  */
-				span.DbugL_multi	   { font-size:9pt; font-family: ProFontWindows, ProFont, Lucida Console, monospace, Courier New; background:#F0F0F9; line-height:100%; }
+				span.DbugL_multi { font-size:9pt; font-family: ProFontWindows, ProFont, Lucida Console, monospace, Courier New; background:#F0F0F9; line-height:100%; }
 				span.DbugL_outer_space { background:gold; }
-				span.DbugL_tabs		{ border-right:1px solid #DDD; }
-
+				span.DbugL_tabs { border-right:1px solid #DDD; }
 				/* arrgh.. if someone has a fix for the wrong widths of the fieldsets in IE7 please let me know :| */
-				fieldset.DbugL_normal	{ display:table-cell; border:1px solid black; padding:2px; }
-				fieldset.DbugL_pickled   { width:90%; border:1px solid black; padding:2px; }
-				legend.DbugL			 { font-size:9pt; font-weight:bold; color:black; }
-				div.DbugL_runtime		{ font-family: Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular, sans-serif; font-size:9pt; font-weight:normal; color:black; background:yellow; padding:2px; }
+				fieldset.DbugL_normal { display:table-cell; border:1px solid black; padding:2px; }
+				fieldset.DbugL_pickled { width:90%; border:1px solid black; padding:2px; }
+				legend.DbugL { font-size:9pt; font-weight:bold; color:black; }
+				div.DbugL_runtime { font-family: Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular, sans-serif; font-size:9pt; font-weight:normal; color:black; background:yellow; padding:2px; }
 				span.DbugL_runtime_label { font-weight:bold; }
-				span.DbugL_type_other	{ font-family: Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular, sans-serif; font-size:8pt; background:#ECEDFE; color:red;}
-				span.DbugL_value_other   { font-family: Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular, sans-serif; font-size:8pt; white-space:nowrap; color:black;}
-
-				table.DbugL					   { background:#D5D5EA; font-size:8pt; border-collapse:separate; }
-				table.DbugL th					{ background:#1E32C8; color:white; text-align:left; padding-left:2px; padding-right:2px; font-weight:normal; }
-				table.DbugL td					{ background:#DEDEEF; font-weight:normal; }
-
-				table.DbugL th.key_single_value   { background:#FFFF00 !important; color:black !important; font-weight:normal !important; padding:3px;}
-				table.DbugL th.key_string		 { color:white; }
-				table.DbugL th.key_number		 { color:green; }
-				table.DbugL th.key_array		  { color:white; font-weight:bold; }
-				table.DbugL th.key_object		 { color:white; font-weight:bold; }
-
-				table.DbugL td.value			  { padding:0px; }
-				table.DbugL td.value_bool_true	{ color:#5BA800; padding:1px; }
-				table.DbugL td.value_bool_false   { color:#D90062; padding:1px; }
-				table.DbugL td.value_string	   { color:black; padding:1px; }
-				table.DbugL td.value_integer	  { color:green; padding:1px; }
-				table.DbugL td.value_double	   { color:blue; padding:1px; }
-				table.DbugL td.value_null		 { color:darkorange; padding:1px; }
-				table.DbugL td.value_empty_array  { color:darkorange; padding:1px; }
+				span.DbugL_type_other { font-family: Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular, sans-serif; font-size:8pt; background:#ECEDFE; color:red;}
+				span.DbugL_value_other { font-family: Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular, sans-serif; font-size:8pt; white-space:nowrap; color:black;}
+				table.DbugL { background:#D5D5EA; font-size:8pt; border-collapse:separate; }
+				table.DbugL th { background:#1E32C8; color:white; text-align:left; padding-left:2px; padding-right:2px; font-weight:normal; }
+				table.DbugL td { background:#DEDEEF; font-weight:normal; }
+				table.DbugL th.key_single_value { background:#FFFF00 !important; color:black !important; font-weight:normal !important; padding:3px;}
+				table.DbugL th.key_string { color:white; }
+				table.DbugL th.key_number { color:green; }
+				table.DbugL th.key_array { color:white; font-weight:bold; }
+				table.DbugL th.key_object { color:white; font-weight:bold; }
+				table.DbugL td.value { padding:0px; }
+				table.DbugL td.value_bool_true { color:#5BA800; padding:1px; }
+				table.DbugL td.value_bool_false { color:#D90062; padding:1px; }
+				table.DbugL td.value_string { color:black; padding:1px; }
+				table.DbugL td.value_integer { color:green; padding:1px; }
+				table.DbugL td.value_double { color:blue; padding:1px; }
+				table.DbugL td.value_null { color:darkorange; padding:1px; }
+				table.DbugL td.value_empty_array { color:darkorange; padding:1px; }
 				table.DbugL td.value_empty_string { color:darkorange; padding:1px; }
-				table.DbugL td.value_skipped	  { color:#666666; padding:1px; }
-
-				div.DbugL_SG				{ color:black; font-weight:bold; font-size:9pt; }
-				table.DbugL_SG			  { width:100%; font-family: Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular, sans-serif;  font-size:8pt; }
-				table.DbugL_SG td		   { }
-				table.DbugL_SG td.globals   { background:#7ACCC8; padding:2px; }
-				table.DbugL_SG td.get	   { background:#7DA7D9; padding:2px; }
-				table.DbugL_SG td.post	  { background:#F49AC1; padding:2px; }
-				table.DbugL_SG td.files	 { background:#82CA9C; padding:2px; }
-				table.DbugL_SG td.session   { background:#FCDB26; padding:2px; }
-				table.DbugL_SG td.cookie	{ background:#A67C52; padding:2px; }
-				table.DbugL_SG td.server	{ background:#A186BE; padding:2px; }
-				table.DbugL_SG td.env	   { background:#7ACCC8; padding:2px; }
-
-
-				div.DbugL_js_hr_first		 { width:100%; border-bottom:1px dashed black; margin:10px 0px 10px 0px; font-size:xx-small; text-align:right; background:gold; }
-				div.DbugL_js_hr			   { width:100%; border-bottom:1px dashed black; margin:10px 0px 10px 0px; font-size:xx-small; text-align:right; background:#EFEFEF }
-				div.DbugL_window_content	  { padding-top:20px; }
+				table.DbugL td.value_skipped { color:#666666; padding:1px; }
+				div.DbugL_SG { color:black; font-weight:bold; font-size:9pt; }
+				table.DbugL_SG { width:100%; font-family: Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular, sans-serif;  font-size:8pt; }
+				table.DbugL_SG td { }
+				table.DbugL_SG td.globals { background:#7ACCC8; padding:2px; }
+				table.DbugL_SG td.get { background:#7DA7D9; padding:2px; }
+				table.DbugL_SG td.post { background:#F49AC1; padding:2px; }
+				table.DbugL_SG td.files { background:#82CA9C; padding:2px; }
+				table.DbugL_SG td.session { background:#FCDB26; padding:2px; }
+				table.DbugL_SG td.cookie { background:#A67C52; padding:2px; }
+				table.DbugL_SG td.server { background:#A186BE; padding:2px; }
+				table.DbugL_SG td.env { background:#7ACCC8; padding:2px; }
+				div.DbugL_js_hr_first { width:100%; border-bottom:1px dashed black; margin:10px 0px 10px 0px; font-size:xx-small; text-align:right; background:gold; }
+				div.DbugL_js_hr { width:100%; border-bottom:1px dashed black; margin:10px 0px 10px 0px; font-size:xx-small; text-align:right; background:#EFEFEF }
+				div.DbugL_window_content { padding-top:20px; }
 				div.DbugL_window_clear_button { text-align:center; font-size:x-small; position:fixed; top:0px; left:0px; background:orange; width:100%; border-bottom:1px solid black; }
-
 			</style>
-
 			<style type="text/css" media="print">
 				table.DbugL_Show_vars {
 					display:none;
@@ -279,7 +267,6 @@ if (function_exists('print_a')) {
 		';
 
 		public function __construct() {
-
 			$this->window_html='
 				<html>
 					<head>
@@ -336,7 +323,6 @@ if (function_exists('print_a')) {
 
 		// #TODO#
 		public static function test_level($level) {
-
 			if (is_array($GLOBALS['DEBUGLIB_LVL'])) {
 				return in_array($level, $GLOBALS['DEBUGLIB_LVL']);
 			} else {
@@ -378,8 +364,9 @@ if (function_exists('print_a')) {
 		public static function format_string($string, $trim_tabs=null, $escape_html=2) {
 
 			$escape_html==2 and $string=htmlspecialchars($string);
-			if ($escape_html==0)
+			if ($escape_html==0) {
 				return $string;
+			}
 
 			$is_multiline=strpos($string, "\n")!==false;
 
@@ -409,8 +396,9 @@ if (function_exists('print_a')) {
 				}
 			}
 
-			if (!$options_string)
+			if (!$options_string) {
 				return $options;
+			}
 
 			if (strpos($options_string, ':')!==false) {
 				$pairs=explode(';', $options_string);
@@ -418,8 +406,9 @@ if (function_exists('print_a')) {
 				foreach ($pairs as &$pair) {
 
 					$pair=trim($pair);
-					if ($pair=='')
+					if ($pair=='') {
 						continue;
+					}
 
 					if (strpos($pair, ':')!==false) {
 
@@ -589,7 +578,6 @@ if (function_exists('print_a')) {
 
 		// called by the global interface function
 		public function print_a($input, &$html, $iter=0) {
-
 			$iter++;
 
 			$input_type=self::get_type($input);
@@ -630,13 +618,10 @@ if (function_exists('print_a')) {
 
 				if ($this->options['avoid@']=='1'&&$key[0]=='@') {
 					$html.=$this->_format_value('Recursion');
-
 				} elseif (is_array($value)&&!empty($value)) {
-
 					$html.=self::_value_s();
 					$this->print_a($value, $html, $iter);
 					$html.=self::_value_e();
-
 				} elseif (is_object($value)) {
 					$html.=self::_value_s();
 					if ($this->options['show_objects']) {
@@ -645,25 +630,17 @@ if (function_exists('print_a')) {
 						$html.='<span title="not shown due to the option &quot;show_objects:0&quot;">...</span>';
 					}
 					$html.=self::_value_e();
-
 				} else {
-
 					$html.=$this->_format_value($value);
-
 				}
-
 				$html.=self::_row_e();
-
 				$loop_i++;
 			}
-
 			$html.=self::_block_e();
-
 		}
 
 		// called by the global interface function
 		public function js_for_popup($html) {
-
 			$title=$this->options['window'];
 			$window_name='DbugL_'.md5($_SERVER['HTTP_HOST']).'_'.$title;
 
@@ -754,12 +731,10 @@ if (function_exists('print_a')) {
 
 			foreach ($GLOBALS as $variable_name=>$variable_value) {
 				if (++$varcount>$GLOBALS['DbugL_Globals']['initial_globals_count']) {
-
 					/* die wollen wir nicht! */
 					if ($variable_name!='HTTP_SESSION_VARS'&&$variable_name!='_SESSION') {
 						$script_globals[$variable_name]=$variable_value;
 					}
-
 				}
 			}
 
@@ -773,13 +748,15 @@ if (function_exists('print_a')) {
 	// ------------------------------- here come the global user functions ------------------------------- //
 
 	function pre($string, $options_string=null) {
-		if (!$GLOBALS['USE_DEBUGLIB'])
+		if (!$GLOBALS['USE_DEBUGLIB']) {
 			return;
+		}
 
 		$options=DbugL::parse_options($options_string);
 
-		if (isset($options['debug_level'])&&$options['debug_level']>$GLOBALS['DEBUGLIB_LVL'])
+		if (isset($options['debug_level'])&&$options['debug_level']>$GLOBALS['DEBUGLIB_LVL']) {
 			return;
+		}
 
 		if (isset($options['trim_tabs'])) {
 			$string=DbugL::trim_leading_tabs($string, $options['trim_tabs']);
@@ -795,8 +772,9 @@ if (function_exists('print_a')) {
 	}
 
 	function pre_die($string, $options_string=null) {
-		if (!$GLOBALS['USE_DEBUGLIB'])
+		if (!$GLOBALS['USE_DEBUGLIB']) {
 			return;
+		}
 
 		pre($string, $options_string);
 		die;
@@ -804,16 +782,17 @@ if (function_exists('print_a')) {
 
 	// shows time elapsed since last call
 	function script_runtime($label='', $style='', $return_mode=false) {
-
 		$bt=debug_backtrace();
 		$bt=$bt[1];
 		$title="({$bt['line']}) {$bt['file']}";
 
-		if ($label!='')
+		if ($label!='') {
 			$label='<span class="DbugL_runtime_label">['.$label.']</span> ';
+		}
 
-		if (!$GLOBALS['USE_DEBUGLIB'])
+		if (!$GLOBALS['USE_DEBUGLIB']) {
 			return;
+		}
 
 		$now_time=microtime(true);
 		if (isset($GLOBALS['DbugL_Globals']['last_microtime'])) {
@@ -834,13 +813,15 @@ if (function_exists('print_a')) {
 
 	// the interface function for Debuglib::_print_a()
 	function print_a($input, $options_string=null) {
-		if (!$GLOBALS['USE_DEBUGLIB'])
+		if (!$GLOBALS['USE_DEBUGLIB']) {
 			return;
+		}
 
 		static $DbugL;
 
-		if (!$DbugL)
+		if (!$DbugL) {
 			$DbugL=new DbugL;
+		}
 		$DbugL->set_options($options_string);
 
 		if (!is_array($input)&&!is_object($input)||(is_array($input)&&count($input)==0)) {
@@ -848,8 +829,9 @@ if (function_exists('print_a')) {
 			$input=['('.gettype($input).')'=>$input];
 		}
 
-		if (!Dbugl::test_level($DbugL->options['debug_level']))
+		if (!Dbugl::test_level($DbugL->options['debug_level'])) {
 			return;
+		}
 
 		$html='';
 
@@ -862,20 +844,15 @@ if (function_exists('print_a')) {
 
 		// open a window for the output?
 		if (isset($DbugL->options['window'])) {
-
 			if ($DbugL->options['pickle']==true) {
-
 				$pickled_input=serialize($input);
 				$pickled_input=str_replace("'", "\\\'", $pickled_input);
 				$pickled_input='<textarea style="width:100%;height:200px;">'.$pickled_input.'</textarea>';
 				$html=$DbugL->js_for_popup($DbugL->get_html($pickled_input));
-
 			} elseif ($DbugL->options['export']==true) {
-
 				$export_input=var_export($input, true);
 				$export_input='<textarea style="width:100%;height:200px;">'.$export_input.'</textarea>';
 				$html=$DbugL->js_for_popup($DbugL->get_html($export_input));
-
 			} else {
 				$html=$DbugL->js_for_popup($DbugL->get_html($html));
 			}
@@ -901,8 +878,9 @@ if (function_exists('print_a')) {
 
 	// call print_a() and die (RIP)
 	function print_a_die($input, $options_string=null) {
-		if (!$GLOBALS['USE_DEBUGLIB'])
+		if (!$GLOBALS['USE_DEBUGLIB']) {
 			return;
+		}
 
 		print_a($input, $options_string);
 		die;
@@ -910,8 +888,9 @@ if (function_exists('print_a')) {
 
 	// good for printing all kind of superglobals at the bottom of a page
 	function show_vars($options_string=null) {
-		if (!$GLOBALS['USE_DEBUGLIB'])
+		if (!$GLOBALS['USE_DEBUGLIB']) {
 			return;
+		}
 
 		$options=DbugL::parse_options($options_string, DbugL::$alt_parameter_names);
 
@@ -948,11 +927,13 @@ if (function_exists('print_a')) {
 
 	// prints out a mysql result.. work in progress.. use at your own risk
 	function print_mysql_result($mysql_result, $return_mode=false) {
-		if (!$GLOBALS['USE_DEBUGLIB'])
+		if (!$GLOBALS['USE_DEBUGLIB']) {
 			return;
+		}
 
-		if (!$mysql_result||mysqli_num_rows($mysql_result)<1)
+		if (!$mysql_result||mysqli_num_rows($mysql_result)<1) {
 			return;
+		}
 
 		$field_count=mysqli_num_fields($mysql_result);
 
@@ -968,10 +949,10 @@ if (function_exists('print_a')) {
 
 		$html='
 			<style type="text/css">
-				table.DbugL_PR		   { font-family: Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular, sans-serif; background:black; margin-bottom:10px; }
+				table.DbugL_PR { font-family: Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular, sans-serif; background:black; margin-bottom:10px; }
 				table.DbugL_PR th.t_name { font-size:9pt; font-weight:bold; color:white; }
 				table.DbugL_PR th.f_name { font-size:7pt; font-weight:bold; color:white; }
-				table.DbugL_PR td		{ padding-left:2px;font-size:7pt; white-space:nowrap; vertical-align:top; }
+				table.DbugL_PR td { padding-left:2px;font-size:7pt; white-space:nowrap; vertical-align:top; }
 			</style>
 			<script type="text/javascript">
 				//<![CDATA[
