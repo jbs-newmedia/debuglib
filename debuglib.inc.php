@@ -1,11 +1,14 @@
 <?php
-#############################################################
-## Name		  : debuglib for PHP5
-## Author		: Thomas Schüßler <debuglib at atomar dot de>
-## Last changed  : 31.03.2009 10:15:13
-## Revision	  : 45
-## Website	   : http://phpdebuglib.de
-############################################################
+
+/**
+ * Based on "debuglib for PHP5" by Thomas Schüßler <debuglib at atomar dot de> (http://phpdebuglib.de)
+ *
+ * @author Juergen Schwind (https://jbs-newmedia.com)
+ * @package debuglib for PHP
+ * @link https://jbs-newmedia.com
+ * @version 46, 2021.05.27 11:12:32
+ * @license https://www.gnu.org/licenses/gpl-3.0.html GNU General Public License 3
+ */
 
 /*
  * Copyright (C) 2004-2009 by Thomas Schüßler
@@ -28,11 +31,11 @@
  *
 */
 
-if (function_exists('print_a')):
+if (function_exists('print_a')) {
 
 	return; // debuglib was already included before
 
-else:
+} else {
 
 	if (!defined('USE_DEBUGLIB'))
 		define('USE_DEBUGLIB', true);
@@ -55,7 +58,7 @@ else:
 		public static $first_call=true;
 
 		// shortcuts for the pros
-		public static $alt_parameter_names=['trim_tabs'=>['tt'], 'label'=>['l'], 'max_y'=>['y'], 'return'=>['r'], 'window'=>['w'], 'window_link'=>['wl'], 'debug_level'=>['lvl'], 'show_objects'=>['so'], 'pickle'=>['p'], 'mail'=>['m'], 'mail_encoding'=>['me'], 'escape_html'=>['e']];
+		public static $alt_parameter_names=['trim_tabs'=>['tt'], 'label'=>['l'], 'max_y'=>['y'], 'return'=>['r'], 'window'=>['w'], 'window_link'=>['wl'], 'debug_level'=>['lvl'], 'show_objects'=>['so'], 'pickle'=>['p'], 'mail'=>['m'], 'mail_encoding'=>['me'], 'escape_html'=>['e'],];
 
 		public static function help($return_mode=false) {
 			$html='
@@ -109,9 +112,9 @@ else:
 						<tr><th>debug_level:</th>			   <td>(0-99)</td>	 <td>Only do something if the debug level value is <= the global debug level ($GLOBALS[\'DEBUGLIB_LVL\'] default 99) <span class="new">new</span></td></tr>
 						<tr><th></th>						   <td></td>		   <td>You can also set it to an array with the levels you want to display e.g. $GLOBALS[\'DEBUGLIB_LVL\'] = array(3,5)</td></tr>
 						<tr><th>avoid@:</th>					<td>(0|1)</td>	  <td>If a key starts with the character "@", assume it is a recursive reference and don\'t follow it.</td></tr>
-						<tr><th>mail:</th>					  <td>(string)</td>   <td>Mail the ouput as HTML mail to the supplied email address. <span class="new">new</span></td></tr>
+						<tr><th>mail:</th>					  <td>(string)</td>   <td>Mail the output as HTML mail to the supplied email address. <span class="new">new</span></td></tr>
 						<tr><th>mail_encoding:</th>			 <td>(string)</td>   <td>encoding for the HTML mail. (defaults to "utf-8")</td></tr>
-						
+
 					</table>
 					<br />
 
@@ -154,7 +157,7 @@ else:
 					</table>
 					<br />
 
-					You can disable the output of all the functions in a production environment by setting <strong>$GLOBALS[\'USE_DEBUGLIB\']</strong> to <strong>FALSE</strong> (e.g. trough auto_prepend in your php.ini).<br />
+					You can disable the output of all the functions in a production environment by setting <strong>$GLOBALS[\'USE_DEBUGLIB\']</strong> to <strong>FALSE</strong> (e.g. through auto_prepend in your php.ini).<br />
 					<br />
 					And if you have to do some online debugging you can enable it again somewhere in your script by setting it to <strong>TRUE</strong>.<br />
 				</div>
@@ -171,7 +174,7 @@ else:
 		public $window_open_tracker=[];
 
 		private $default_options=['label'=>null, 'window'=>null, 'window_link'=>false, 'max_y'=>0, 'test_for_recursions'=>false, 'show_objects'=>true, 'trim_tabs'=>null, 'avoid@'=>false, 'return'=>false, 'pickle'=>false, 'export'=>false, 'escape_html'=>2, 'mail'=>null, 'mail_encoding'=>'utf-8', // iso-8859-1
-			'debug_level'=>0];
+			'debug_level'=>0,];
 
 		public $options=[];
 
@@ -211,7 +214,7 @@ else:
 				a.DbugL_window_link	{ font-size:xx-small; color:black; border:1px solid darkorange; padding:3px; background:#F1F1F1; margin:2px;}
 
 				div.DbugL_pre		  { font-size:8pt; font-family: Verdana, Arial, Helvetica, Geneva, Swiss, SunSans-Regular, sans-serif; margin-bottom:10px; }
-				
+
 				/* Profont is a monospace bitmap font which absolutely rocks! see: http://www.tobias-jung.de/seekingprofont/  */
 				span.DbugL_multi	   { font-size:9pt; font-family: ProFontWindows, ProFont, Lucida Console, monospace, Courier New; background:#F0F0F9; line-height:100%; }
 				span.DbugL_outer_space { background:gold; }
@@ -258,13 +261,13 @@ else:
 				table.DbugL_SG td.cookie	{ background:#A67C52; padding:2px; }
 				table.DbugL_SG td.server	{ background:#A186BE; padding:2px; }
 				table.DbugL_SG td.env	   { background:#7ACCC8; padding:2px; }
-				
+
 
 				div.DbugL_js_hr_first		 { width:100%; border-bottom:1px dashed black; margin:10px 0px 10px 0px; font-size:xx-small; text-align:right; background:gold; }
 				div.DbugL_js_hr			   { width:100%; border-bottom:1px dashed black; margin:10px 0px 10px 0px; font-size:xx-small; text-align:right; background:#EFEFEF }
 				div.DbugL_window_content	  { padding-top:20px; }
 				div.DbugL_window_clear_button { text-align:center; font-size:x-small; position:fixed; top:0px; left:0px; background:orange; width:100%; border-bottom:1px solid black; }
-				
+
 			</style>
 
 			<style type="text/css" media="print">
@@ -283,15 +286,15 @@ else:
 						'.self::$css.'
 						<script type="text/javascript">
 							//<![CDATA[
-							
+
 							var DbugL_test_var = true;
-							
+
 							function append_html(html) {
 								document.getElementById("content").innerHTML += html;
 								window.scrollTo(0, 1000000);
 								window.focus();
 							}
-							
+
 							function cls() {
 								document.getElementById("content").innerHTML = "";
 							}
@@ -320,7 +323,7 @@ else:
 			return gettype($value);
 		}
 
-		// ouput the css block only if the first time one of the output functions get called
+		// output the css block only if the first time one of the output functions get called
 		public static function html_prefix() {
 			if (self::$first_call) {
 				self::$first_call=false;
@@ -361,7 +364,9 @@ else:
 
 		public static function _handle_whitespace($string) {
 			// replace 2 or more spaces with nobreaks (for special markup)
-			$string=preg_replace_callback('/ {2,}/', create_function('$matches', 'return str_repeat("&nbsp;", strlen($matches[0]));'), $string);
+			$string=preg_replace_callback('/ {2,}/', function($matches) {
+				return str_repeat("&nbsp;", strlen($matches[0]));
+			}, $string);
 
 			$string=preg_replace(['/&nbsp;$/', '/^&nbsp;/'], '<span class="DbugL_outer_space">&nbsp;</span>', $string); # mark spaces at the start/end of the string with red underscores
 			$string=str_replace("\t", '&nbsp;&nbsp;<span class="DbugL_tabs">&nbsp;</span>', $string); # replace tabulators with '  »'
@@ -418,7 +423,7 @@ else:
 
 					if (strpos($pair, ':')!==false) {
 
-						list($option, $value)=explode(':', $pair);
+						[$option, $value]=explode(':', $pair);
 
 						if (isset($alt_parameter_mapping[$option])) {
 							$options[$alt_parameter_mapping[$option]]=$value;
@@ -686,13 +691,13 @@ else:
 					//<![CDATA[
 
 						'.($this->options['window_link']?'function open_'.$window_name.'() {':'').'
-							
+
 							try {
-								
+
 								if(window["'.$window_name.'"] == undefined) {
 									window["'.$window_name.'"] = window.open("", "W'.$window_name.'", "menubar=no,scrollbars=yes,resizable=yes,width=640,height=480");
 								}
-								
+
 								if(window["'.$window_name.'"].DbugL_test_var == undefined) {
 									with (window["'.$window_name.'"].document) {
 										open();
@@ -701,10 +706,10 @@ else:
 										title = "'.$title.' Debugwindow for : http(s)://'.$debugwindow_origin.'";
 									}
 								}
-								
+
 								window["'.$window_name.'"].append_html("<div class=\"'.$hr_class.'\">"+ new Date().toLocaleString() +"</div>");
 								window["'.$window_name.'"].append_html("'.$html.'");
-							
+
 							} catch(e) {
 								if(window["DbugL_popup_flag"] == undefined) {
 									alert("print_a() could not open window. Please enable popups!");
@@ -903,15 +908,6 @@ else:
 		die;
 	}
 
-	// deprecated
-	function die_a($input, $options_string=null) {
-		if (!$GLOBALS['USE_DEBUGLIB'])
-			return;
-
-		print_a($input, $options_string);
-		die;
-	}
-
 	// good for printing all kind of superglobals at the bottom of a page
 	function show_vars($options_string=null) {
 		if (!$GLOBALS['USE_DEBUGLIB'])
@@ -921,7 +917,7 @@ else:
 
 		$print_a_options=$options_string.';return:1;';
 
-		$superglobals=['Script $GLOBALS'=>DbugL::script_globals(), '$_GET'=>$_GET, '$_POST'=>$_POST, '$_FILES'=>$_FILES, '$_SESSION'=>$_SESSION, '$_COOKIE'=>$_COOKIE];
+		$superglobals=['Script $GLOBALS'=>DbugL::script_globals(), '$_GET'=>$_GET, '$_POST'=>$_POST, '$_FILES'=>$_FILES, '$_SESSION'=>$_SESSION, '$_COOKIE'=>$_COOKIE,];
 
 		if (isset($options['verbose'])&&$options['verbose']=='1') {
 			$superglobals['$_SERVER']=$_SERVER;
@@ -955,18 +951,18 @@ else:
 		if (!$GLOBALS['USE_DEBUGLIB'])
 			return;
 
-		if (!$mysql_result||mysql_num_rows($mysql_result)<1)
+		if (!$mysql_result||mysqli_num_rows($mysql_result)<1)
 			return;
 
-		$field_count=mysql_num_fields($mysql_result);
+		$field_count=mysqli_num_fields($mysql_result);
 
 		$tables=[];
 
 		for ($i=0; $i<$field_count; $i++) {
-			if (isset($tables[mysql_field_table($mysql_result, $i)])) {
-				$tables[mysql_field_table($mysql_result, $i)]++;
+			if (isset($tables[mysqli_fetch_field_direct($mysql_result, $i)])) {
+				$tables[mysqli_fetch_field_direct($mysql_result, $i)]++;
 			} else {
-				$tables[mysql_field_table($mysql_result, $i)]=1;
+				$tables[mysqli_fetch_field_direct($mysql_result, $i)]=1;
 			}
 		}
 
@@ -1006,20 +1002,20 @@ else:
 		$html.='</tr>';
 
 		$html.='<tr>';
-		for ($i=0; $i<mysql_num_fields($mysql_result); $i++) {
-			$field=mysql_field_name($mysql_result, $i);
+		for ($i=0; $i<mysqli_num_fields($mysql_result); $i++) {
+			$field=mysqli_fetch_field_direct($mysql_result, $i);
 			$col=='#0054A6'?$col='#003471':$col='#0054A6';
 			$html.='<th style="background:'.$col.';" class="f_name">'.$field.'</th>';
 		}
 		$html.='</tr>';
 
-		mysql_data_seek($mysql_result, 0);
+		mysqli_data_seek($mysql_result, 0);
 
 		$toggle=false;
 		$pointer=0;
 
 		$table_id=str_replace('.', '', microtime(true));
-		while ($db_row=mysql_fetch_array($mysql_result, MYSQL_NUM)) {
+		while ($db_row=mysqli_fetch_array($mysql_result, MYSQL_NUM)) {
 			$pointer++;
 			if ($toggle) {
 				$col1="#E6E6E6";
@@ -1034,14 +1030,14 @@ else:
 			$html.='<tr id="'.$id.'" onMouseDown="DbugL_highlight(\''.$id.'\');">';
 			foreach ($db_row as $i=>$value) {
 				$col==$col1?$col=$col2:$col=$col1;
-				$flags=mysql_field_flags($mysql_result, $i);
+				$flags=mysqli_fetch_field_direct($mysql_result, $i);
 				$primary_flag=strpos($flags, 'primary_key')!==false;
 				$html.='<td style="background:'.$col.';'.($primary_flag?'font-weight:bold;':'').'" nowrap="nowrap">'.nl2br($value).'</td>';
 			}
 			$html.='</tr>';
 		}
 		$html.='</table>';
-		mysql_data_seek($mysql_result, 0);
+		mysqli_data_seek($mysql_result, 0);
 
 		if ($return_mode) {
 			return $html;
@@ -1049,17 +1045,6 @@ else:
 			print $html;
 		}
 	}
+}
 
-endif;
-
-#TODO#
-/*
-	inject css through javascript (inline style is bad... m'kay?)
-	unify options parsing
-	debuglevel and default parameter arrays for every function
-	fix fieldset width in IEx
-	debug backtrace issues
-	write a C extension that can test for reference recursions
-	start from scratch :)
-*/
-
+?>
